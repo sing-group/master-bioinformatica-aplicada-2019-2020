@@ -13,6 +13,8 @@ dim(data)
 head(data)
 summary(data)
 
+dir.create("figures", showWarnings=FALSE)
+
 #	---------------------------------------------------------------------------
 #
 #	Working with caret
@@ -199,7 +201,7 @@ printTrainTestPredictions(nn, train, test)
 
 library("NeuralNetTools")
 
-png("neural-network-2-caret.png")
+png("figures/neural-network-2-caret.png")
 plotnet(nn)
 dev.off()
 
@@ -236,11 +238,11 @@ results <- resamples(modelFits)
 
 summary(results)
 
-png("classification-caret-bwplot.png")
+png("figures/classification-caret-bwplot.png")
 bwplot(results)
 dev.off()
 
-png("classification-caret-dotplot.png")
+png("figures/classification-caret-dotplot.png")
 dotplot(results)
 dev.off()
 
