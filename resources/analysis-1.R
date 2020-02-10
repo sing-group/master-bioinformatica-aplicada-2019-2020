@@ -432,6 +432,12 @@ ggplot(roc_df, aes(x=specificity, y=recall)) +
 	geom_line(data=data.frame(x=(0:100)/100), aes(x=x, y=1-x), linetype='dotted', color='red')
 dev.off()
 
+library("pROC")
+
+png("figures/roc-3.png")
+plot.roc(test$diagnosis, pred)
+dev.off()
+
 # Area Under the Curve (AUC)
 
 auc <- sum(roc_df$recall[-1] * diff(1-roc_df$specificity))
