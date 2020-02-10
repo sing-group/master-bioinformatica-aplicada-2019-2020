@@ -333,10 +333,19 @@ table(nn.pred.test, y.test)
 # the model
 #
 
-x <- scale(x)
-test.scale <- scale(test[,-1])
+# 
+# Test data must be scaled using the same means and standard deviations than
+# in the train set. Thus, thes values are first computed on the original 
+# training data (x) and then both train and test data are scaled.
+#
 
-nn.2 <- mlp(x, y, size=c(5))
+means <- colMeans(x)
+standard.deviations <- apply(x, 2, sd)
+
+x.scale <- scale(x)
+test.scale <- scale(test[,-1], center=means, scale=standard.deviations)
+
+nn.2 <- mlp(x.scale, y, size=c(5))
 nn.2
 
 # Train data predictions
